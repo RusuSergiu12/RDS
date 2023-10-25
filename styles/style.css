@@ -9,11 +9,26 @@ body {
     height: 100vh;
     margin: 0;
 }
-#myForm {
-    background-color: rgba(255, 255, 255, 0.9);
-    border: 1px solid #000;
-    margin: 10px;
+.container {
+    background-color: rgba(255, 255, 255, 0.7);
+    height: 800px;
+    width: 200px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
+.transparent-form {
+    text-align: center;
+}
 
-
+.pie-chart-title {
+    margin: 0 auto; 
+    margin-top: 20px;
+}
+.form-select {
+    background: #ccc;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 20px;
+    font-size: 16px;
+}
