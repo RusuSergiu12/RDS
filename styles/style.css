@@ -1,29 +1,32 @@
-
 body {
-    background-image: url('/images/background.png');
+    background-image: url('/images/background2.png');
     background-size: cover;
     background-repeat: no-repeat;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start; 
     height: 100vh;
     margin: 0;
 }
+
 .container {
     background-color: rgba(255, 255, 255, 0.7);
-    height: 800px;
-    width: 200px;
+    height: auto;
+    max-width: 400px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
 }
 
 .transparent-form {
-    text-align: center;
+    text-align: left;
 }
 
 .pie-chart-title {
-    margin: 0 auto; 
     margin-top: 20px;
 }
+
 .form-select {
     background: #ccc;
     border: 1px solid #ccc;
@@ -31,4 +34,21 @@ body {
     padding: 10px;
     margin-top: 20px;
     font-size: 16px;
+}
+
+#inputFields {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.input-group, .color-input {
+    margin: 15px 0;
+    text-align: left;
+    vertical-align: top;
+}
+
+.color-input {
+    margin-left: 5px;
 }
