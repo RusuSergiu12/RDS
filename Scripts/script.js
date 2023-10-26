@@ -1,47 +1,92 @@
 window.onload = function () {
-    const selectElement = document.querySelector('select.form-select');
-    const inputFields = document.getElementById("inputFields");
+  const selectElement = document.querySelector('select.form-select');
+  const inputFields = document.getElementById("inputFields");
+  const canvas = document.getElementById("pieChart");
+  const pieCanvas = canvas.getContext("2d");
 
-    function toggleInputFields() {
+  function toggleInputFields() {
       const sliceCount = parseInt(selectElement.value);
       inputFields.innerHTML = "";
-  
-      if (sliceCount > 0) {
-        for (let i = 1; i <= sliceCount; i++) {
-          const inputContainer = document.createElement("div");
-  
-          const labelText = document.createElement("label");
-         
-  
-          const elementInput = document.createElement("input");
-          elementInput.type = "text";
-          elementInput.placeholder = "Label";
-          elementInput.name = `label${i}`;
-  
-          const valueInput = document.createElement("input");
-          valueInput.type = "text";
-          valueInput.placeholder = "Value";
-          valueInput.name = `value${i}`;
-  
-          const colorPicker = document.createElement("input");
-          colorPicker.type = "color";
-          colorPicker.name = `color${i}`;
-  
-          inputContainer.appendChild(labelText);
-          inputContainer.appendChild(elementInput);
-          inputContainer.appendChild(valueInput);
-          inputContainer.appendChild(colorPicker);
-  
-          inputFields.appendChild(inputContainer);
-        }
-      }
-    }
-  
-    
 
-    toggleInputFields();
-  
-    selectElement.addEventListener("change", toggleInputFields);
-    
-  };
-  
+      if (sliceCount > 0) {
+          for (let i = 1; i <= sliceCount; i++) {
+              const inputContainer = document.createElement("div");
+              const labelText = document.createElement("label");
+              const elementInput = document.createElement("input");
+              elementInput.type = "text";
+              elementInput.placeholder = "Label";
+              elementInput.name = `label${i}`;
+
+              const valueInput = document.createElement("input");
+              valueInput.type = "text";
+              valueInput.placeholder = "Value";
+              valueInput.name = `value${i}`;
+              valueInput.addEventListener("input", drawPieChart);
+
+              const colorPicker = document.createElement("input");
+              colorPicker.value = "#FFFFFF";
+              colorPicker.type = "color";
+              colorPicker.name = `color${i}`;
+              colorPicker.addEventListener("input", drawPieChart);
+
+              inputContainer.appendChild(labelText);
+              inputContainer.appendChild(elementInput);
+              inputContainer.appendChild(valueInput);
+              inputContainer.appendChild(colorPicker);
+
+              inputFields.appendChild(inputContainer);
+          }
+      }
+      drawPieChart(); 
+  }
+
+  function drawPieChart() {
+    pieCanvas.clearRect(0, 0, canvas.width, canvas.height);
+
+    const sliceCount = parseInt(selectElement.value);
+    const data = [];
+    let totalValues = 0;
+
+    for (let i = 1; i <= sliceCount; i++) {
+        const label = document.querySelector(`input[name="label${i}"]`).value;
+        const value = parseFloat(document.querySelector(`input[name="value${i}"]`).value);
+        const color = document.querySelector(`input[name="color${i}"]`).value;
+
+        data.push({ label, value, color });
+        totalValues += value;
+    }
+
+    let startAngle = 0;
+
+    for (let i = 0; i < data.length; i++) {
+        const slice = (data[i].value / totalValues) * 2 * Math.PI;
+        const sliceMiddleAngle = startAngle + slice / 2;
+
+        pieCanvas.beginPath();
+        pieCanvas.moveTo(canvas.width / 2, canvas.height / 2);
+        pieCanvas.arc(canvas.width / 2, canvas.height / 2, canvas.width / 3, startAngle, startAngle + slice, false);
+        pieCanvas.fillStyle = data[i].color;
+        pieCanvas.fill();
+
+        pieCanvas.strokeStyle = "black";
+        pieCanvas.lineWidth = 4;
+        pieCanvas.stroke(); 
+
+        const labelX = canvas.width / 2 + (canvas.width / 5) * Math.cos(sliceMiddleAngle);
+        const labelY = canvas.height / 2 + (canvas.width / 5) * Math.sin(sliceMiddleAngle);
+        pieCanvas.font = "bold 16px Arial";
+        pieCanvas.fillStyle = "black";
+        pieCanvas.fillText(data[i].label, labelX, labelY - 20);
+        pieCanvas.fillText(`(${((data[i].value / totalValues) * 100).toFixed(2)}%)`, labelX, labelY + 20);
+        startAngle += slice;
+    }
+}
+
+
+
+
+
+  toggleInputFields();
+
+  selectElement.addEventListener("change", toggleInputFields);
+};
