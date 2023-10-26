@@ -16,7 +16,15 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     text-align: center;
     padding: 20px;
-    margin-top: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.form-container {
+    flex: 1; 
+    padding: 20px;
 }
 
 .transparent-form {
@@ -51,4 +59,11 @@ body {
 
 .color-input {
     margin-left: 5px;
+}
+
+
+#pieChart {
+    margin-left: auto;
+    margin-left: 20px; 
+    display: inline-block;
 }
