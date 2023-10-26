@@ -22,10 +22,7 @@ body {
     align-items: flex-start;
     justify-content: flex-start;
 }
-.form-container {
-    flex: 1; 
-    padding: 20px;
-}
+
 
 .transparent-form {
     text-align: left;
