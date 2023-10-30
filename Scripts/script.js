@@ -85,15 +85,15 @@ window.onload = function () {
         pieCanvas.lineWidth = 4;
         pieCanvas.stroke();
   
-        const labelX = canvas.width / 2 + (canvas.width / 5) * Math.cos(sliceMiddleAngle);
-        const labelY = canvas.height / 2 + (canvas.width / 5) * Math.sin(sliceMiddleAngle);
-        pieCanvas.font = "bold 16px Arial";
+        const labelX = canvas.width / 2 + (canvas.width / 4) * Math.cos(sliceMiddleAngle);
+        const labelY = canvas.height / 2 + (canvas.width / 4) * Math.sin(sliceMiddleAngle);
+        pieCanvas.font = "bold 14px Arial";
         pieCanvas.fillStyle = "black";
         pieCanvas.fillText(data[i].label, labelX, labelY - 20);
         pieCanvas.fillText(
           `(${((data[i].value / totalValues) * 100).toFixed(2)}%)`,
           labelX,
-          labelY + 20
+          labelY
         );
         startAngle += slice;
       }
