@@ -16,6 +16,7 @@ window.onload = function () {
               elementInput.type = "text";
               elementInput.placeholder = "Label";
               elementInput.name = `label${i}`;
+              elementInput.addEventListener("input", drawPieChart);
 
               const valueInput = document.createElement("input");
               valueInput.type = "text";
@@ -24,7 +25,7 @@ window.onload = function () {
               valueInput.addEventListener("input", drawPieChart);
 
               const colorPicker = document.createElement("input");
-              colorPicker.value = "#FFFFFF";
+              colorPicker.value = "#" + Math.floor(Math.random() * 16777215).toString(16);
               colorPicker.type = "color";
               colorPicker.name = `color${i}`;
               colorPicker.addEventListener("input", drawPieChart);
