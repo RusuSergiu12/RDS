@@ -4,19 +4,21 @@ window.onload = function () {
     const canvas = document.getElementById("pieChart");
     const pieCanvas = canvas.getContext("2d");
   
-    function toggleInputFields() {
+    function generateFields() {
       const sliceCount = parseInt(selectElement.value);
       inputFields.innerHTML = "";
   
       if (sliceCount > 0) {
         for (let i = 1; i <= sliceCount; i++) {
-          const inputContainer = document.createElement("div");
-          const labelText = document.createElement("label");
-          const elementInput = document.createElement("input");
-          elementInput.type = "text";
-          elementInput.placeholder = "Label";
-          elementInput.name = `label${i}`;
-          elementInput.addEventListener("input", drawPieChart);
+            const inputContainer = document.createElement("div");
+            const labelText = document.createElement("label");
+
+          const labelInput = document.createElement("input");
+          labelInput.type = "text";  
+
+          labelInput.placeholder = "Label";
+          labelInput.name = `label${i}`;
+          labelInput.addEventListener("input", drawPieChart);
   
           const valueInput = document.createElement("input");
           valueInput.type = "text";
@@ -31,13 +33,15 @@ window.onload = function () {
           colorPicker.addEventListener("input", drawPieChart);
   
           inputContainer.appendChild(labelText);
-          inputContainer.appendChild(elementInput);
+          inputContainer.appendChild(labelInput);
           inputContainer.appendChild(valueInput);
           inputContainer.appendChild(colorPicker);
   
           inputFields.appendChild(inputContainer);
+          
         }
       }
+      drawPieChart();
     }
   
     function drawPieChart() {
@@ -95,8 +99,8 @@ window.onload = function () {
       }
     }
   
-    toggleInputFields();
+    generateFields();
   
-    selectElement.addEventListener("change", toggleInputFields);
+    selectElement.addEventListener("change", generateFields);
   };
   
