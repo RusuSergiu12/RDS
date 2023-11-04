@@ -3,9 +3,13 @@ window.onload = function () {
     const inputFields = document.getElementById("inputFields");
     const canvas = document.getElementById("pieChart");
     const pieCanvas = canvas.getContext("2d");
+    const generateButton=document.getElementById("generateButton");
+
+    
   
     function generateFields() {
       const sliceCount = parseInt(selectElement.value);
+      
       inputFields.innerHTML = "";
   
       if (sliceCount > 0) {
@@ -18,19 +22,24 @@ window.onload = function () {
 
           labelInput.placeholder = "Label";
           labelInput.name = `label${i}`;
-          labelInput.addEventListener("input", drawPieChart);
+
+
+          labelInput.addEventListener("input", validateInput);
+          //labelInput.addEventListener("input", drawPieChart);
   
           const valueInput = document.createElement("input");
           valueInput.type = "text";
           valueInput.placeholder = "Value";
           valueInput.name = `value${i}`;
-          valueInput.addEventListener("input", drawPieChart);
+
+          valueInput.addEventListener("input", validateInput);
+          //valueInput.addEventListener("input", drawPieChart);
   
           const colorPicker = document.createElement("input");
           colorPicker.value = "#" + Math.floor(Math.random() * 16777215).toString(16);
           colorPicker.type = "color";
           colorPicker.name = `color${i}`;
-          colorPicker.addEventListener("input", drawPieChart);
+          //colorPicker.addEventListener("input", drawPieChart);
   
           inputContainer.appendChild(labelText);
           inputContainer.appendChild(labelInput);
@@ -41,7 +50,35 @@ window.onload = function () {
           
         }
       }
-      drawPieChart();
+      //drawPieChart();
+    }
+    function validateInput(){
+      const sliceCount=parseInt(selectElement.value);
+      let isValid=true;
+
+      for(let i=1; i<=sliceCount; i++){
+        const labelInput=document.querySelector(`input[name="label${i}"]`);
+        const valueInput = document.querySelector(`input[name="value${i}"]`);
+
+        
+
+      const labelValue = labelInput.value.trim();
+      const valueValue = valueInput.value.trim();
+      labelInput.style.border = "";
+      valueInput.style.border = "";
+
+      if (labelValue.length < 3) {
+        labelInput.style.border = "2px solid red";
+        isValid=false;
+      }
+
+      if (!/^[0-9]+$/.test(valueValue)) {
+        valueInput.style.border = "2px solid red";
+        isValid=false;
+    }
+      }
+      return isValid;
+
     }
   
     function drawPieChart() {
@@ -62,6 +99,7 @@ window.onload = function () {
         }
       }
   
+      
       let startAngle = 0;
   
       for (let i = 0; i < data.length; i++) {
@@ -98,6 +136,15 @@ window.onload = function () {
         startAngle += slice;
       }
     }
+    generateButton.addEventListener("click", function() {
+      if (!validateInput()) {
+        alert("The attributes are not correct. Please try again.");
+        return;
+      }
+    
+      drawPieChart();
+    });
+    //generateButton.addEventListener("click", drawPieChart);
   
     generateFields();
   
