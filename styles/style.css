@@ -4,7 +4,7 @@ body {
     background-repeat: no-repeat;
     display: flex;
     justify-content: flex-start;
-    align-items: flex-start; 
+    align-items: flex-start;
     height: 100vh;
     margin: 0;
 }
@@ -12,7 +12,8 @@ body {
 .container {
     background-color: rgba(255, 255, 255, 0.7);
     height: auto;
-    max-width: 400px;
+    
+    max-width: 800px; 
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     text-align: center;
     padding: 20px;
@@ -21,9 +22,7 @@ body {
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
-    
 }
-
 
 .transparent-form {
     text-align: left;
@@ -38,8 +37,10 @@ body {
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
+    width: 100%;
     margin-top: 20px;
     font-size: 16px;
+    
 }
 
 #inputFields {
@@ -54,16 +55,20 @@ body {
     text-align: left;
     vertical-align: top;
 }
+.form-group {
+    margin-bottom: 15px; 
+}
 
 .color-input {
     margin-left: 5px;
 }
 
-
 #pieChart {
     margin-left: auto;
     margin-left: 20px; 
     display: inline-block;
+    max-width: 100%; 
+    height: auto;
 }
 
 .btnClass {
@@ -76,14 +81,7 @@ body {
    
   }
   #generateButton {
-    position: absolute;
+    margin-top:15px;
     bottom: 110px;   
+
   }
-  
-  
-  
-  
-  
-  
-  
-  
