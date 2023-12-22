@@ -11,7 +11,7 @@ window.onload = function () {
   audio1.src="sound.mp3";
   let audioAPI=document.getElementById("audioApi");
 
-  function playAudioSlices (value){
+  function playAudioSlices (){
   const sliceCount = parseInt(selectElement.value);
    if(sliceCount>0){
       const message= new SpeechSynthesisUtterance(sliceCount.toString());
