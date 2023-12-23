@@ -14,7 +14,7 @@ window.onload = function () {
   function playAudioSlices (){
   const sliceCount = parseInt(selectElement.value);
    if(sliceCount>0){
-      const message= new SpeechSynthesisUtterance(sliceCount.toString());
+      const message= new SpeechSynthesisUtterance("You chose " +sliceCount.toString() + " slices, input data, then click generate to draw the pie chart");
       speechSynthesis.speak(message);
     }
   }
@@ -66,6 +66,7 @@ window.onload = function () {
         inputFields.appendChild(inputContainer);
         
       }
+      playAudioSlices();
     }
     //drawPieChart();
   }
